@@ -3,9 +3,11 @@ from django.shortcuts import render
 
 # Create your views here.
 
-#home pages views start here
+# home pages views start here
+
+
 def home(request):
-    return HttpResponse("index page")
+    return render(request, "home.html")
 
 
 def adminclick(request):
@@ -19,4 +21,10 @@ def doctorclick(request):
 def patientclick(request):
     return HttpResponse("patient click")
 
-#home pages views end here
+# home pages views end here
+
+# registration view start
+
+
+def registration(request):
+    return render(request, "registration.html")

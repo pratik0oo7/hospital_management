@@ -2,10 +2,15 @@
 <html lang="eng" dir="ltr">
     <head>
         <meta charset="UTF-8">
-        <title>WELCOME HOME</title>
+        <style src="text/css">
+            body
+            {
+                padding:10px;
+            }
+        </style>
     </head>
     <body>
-        {% include templates/navbar.html %}
+        {% include "navbar.html" %}
         {% block content %}
         {% endblock content %}
     </body>

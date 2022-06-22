@@ -1,0 +1,106 @@
+{% load static %}
+{% block head %}
+<style>
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      max-width: 300px;
+      margin: auto;
+      text-align: center;
+      font-family: arial;
+    }
+
+    .title {
+      color: grey;
+      font-size: 18px;
+    }
+
+    button {
+      background-color: #000;
+    }
+    button, .btn-group{
+        border: none;
+        outline: 0;
+        display: inline-block;
+        padding: 8px;
+        color: white;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+      }
+    button:hover,
+    a:hover {
+      opacity: 0.7;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      padding: 10px;
+    }
+
+    a:link {
+      text-decoration: none;
+    }
+
+    a {
+      color: white;
+    }
+  </style>
+{% endblock head %}
+
+{% block content %}
+    
+<p>
+    <div class="btn-group" role="group" aria-label="Basic radio toggle">
+        <input class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btnradio1"><button class="btn" type="radio" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Toggle second element</button></label>
+      
+        <input class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btnradio2"><button class="btn" type="radio" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1">Toggle both elements</button></label>
+      </div>
+    
+</p>
+  <div class="row">
+    <div class="col">
+      <div class="collapse multi-collapse" id="multiCollapseExample1">
+        <div class="card card-body">
+            <div class="collapse collapse-horizontal" id="multiCollapseExample1">
+                <div class="card card-body" style="width: 300px;">
+                  <div class="grid-container">
+                      <div class="grid-item">
+                        <div class="card">
+                          <img src="{% static "images/doctor.png" %}" alt="John" style="width:100%">
+                          <p class="title">DOCTOR</p>
+                          <p><button><a href="/doctorclick">View</a></button></p>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+          <div class="collapse multi-collapse" id="multiCollapseExample2">
+            <div class="card card-body">
+                <div class="collapse collapse-horizontal" id="multiCollapseExample2">
+                    <div class="card card-body" style="width: 300px;">
+                      <div class="grid-container">
+                        <div class="grid-item">
+                            <div class="card">
+                              <img src="{% static "images/patient.jpg" %}" alt="John" style="width:100%">
+                              <p class="title">PATIENT</p>
+                              <p><button><a href="/patientclick">View</a></button></p>
+                            </div>
+                          </div>
+                      
+                        </div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+  </div>
+</div>
+{% endblock content %}
+{% comment %}  {% endcomment %}
