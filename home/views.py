@@ -11,15 +11,15 @@ def home(request):
 
 
 def adminclick(request):
-    return HttpResponse("admin click")
+    return render(request, "adminclick.html")
 
 
 def doctorclick(request):
-    return HttpResponse("doctor click")
+    return render(request, "doctorclick.html")
 
 
 def patientclick(request):
-    return HttpResponse("patient click")
+    return render(request, "patientclick.html")
 
 # home pages views end here
 
