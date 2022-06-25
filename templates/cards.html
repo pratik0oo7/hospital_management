@@ -1,6 +1,7 @@
 {% load static %}
 {% block head %}
 <style>
+  
     .card {
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
       max-width: 300px;
@@ -54,10 +55,10 @@
 <p>
     <div class="btn-group" role="group" aria-label="Basic radio toggle">
         <input class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
-        <label class="btn btn-outline-primary" for="btnradio1"><button class="btn" type="radio" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Toggle second element</button></label>
+        <label class="btn btn-outline-primary" for="btnradio1"><button class="btn" type="radio" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="true" aria-controls="multiCollapseExample2">Toggle second element</button></label>
       
         <input class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-        <label class="btn btn-outline-primary" for="btnradio2"><button class="btn" type="radio" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1">Toggle both elements</button></label>
+        <label class="btn btn-outline-primary" for="btnradio2"><button class="btn" type="radio" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample1" aria-expanded="true" aria-controls="multiCollapseExample1">Toggle both elements</button></label>
       </div>
     
 </p>
@@ -94,7 +95,6 @@
                               <p><button><a href="/patientclick">View</a></button></p>
                             </div>
                           </div>
-                      
                         </div>
                     </div>
                   </div>
@@ -103,4 +103,3 @@
   </div>
 </div>
 {% endblock content %}
-{% comment %}  {% endcomment %}

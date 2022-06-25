@@ -1,5 +1,7 @@
+from django.contrib import messages
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User, auth
 
 # Create your views here.
 
@@ -11,15 +13,15 @@ def home(request):
 
 
 def adminclick(request):
-    return HttpResponse("admin click")
+    return render(request, "adminclick.html")
 
 
 def doctorclick(request):
-    return HttpResponse("doctor click")
+    return render(request, "doctorclick.html")
 
 
 def patientclick(request):
-    return HttpResponse("patient click")
+    return render(request, "patientclick.html")
 
 # home pages views end here
 
@@ -28,3 +30,11 @@ def patientclick(request):
 
 def registration(request):
     return render(request, "registration.html")
+
+
+def patientlogin(request):
+    return render(request, 'patientlogin.html')
+
+
+def patientsignup(request):
+    return render(request, 'patientsignup.html')

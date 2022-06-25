@@ -16,11 +16,19 @@ Including another URLconf
 from django import views
 from django.contrib import admin
 from django.urls import include, path
+from django.contrib.auth.views import LoginView, LogoutView
 from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
+    # click urls
     path('doctorclick', views.doctorclick, name='doctorclick'),
+    path('adminclick', views.adminclick, name='adminclick'),
     path('patientclick', views.patientclick, name='patientclick'),
+
+    #regitration and login
     path('registration', views.registration, name='registration'),
+    #patient
+    path('patientlogin', views.patientlogin, name='patientlogin'),
+    path('patientsignup', views.patientsignup, name='patientsignup'),
 ]
