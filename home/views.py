@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 
+from home import forms
+
 # Create your views here.
 
 # home pages views start here
@@ -37,4 +39,7 @@ def patientlogin(request):
 
 
 def patientsignup(request):
-    return render(request, 'patientsignup.html')
+    userform = forms.patientuserform()
+    patientform = forms.patientform()
+    p_context = {'userform': userform, 'patientform': patientform}
+    return render(request, 'patientsignup.html', context=p_context)
