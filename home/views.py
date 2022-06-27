@@ -44,8 +44,13 @@ def patientsignup(request):
     p_context = {'userform': userform, 'patientform': patientform}
     return render(request, 'patientsignup.html', context=p_context)
 
+
 def doctorlogin(request):
     return render(request, 'doctorlogin.html')
 
+
 def doctorsignup(request):
-    return render(request, 'doctorsignup.html')
+    userform = forms.doctoruserform()
+    doctorform = forms.doctorform()
+    p_context = {'userform': userform, 'doctorform': doctorform}
+    return render(request, 'doctorsignup.html', context=p_context)
