@@ -26,74 +26,46 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="FIRST NAME" required>
-                                        {% comment %} {% render_field userForm.first_name class="form-control"
-                                        placeholder="First Name" %} {% endcomment %}
+                                        {% render_field userform.first_name required="required" class="form-control" placeholder="FIRST NAME"%}
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="USER NAME" required>
-                                        {% comment %} {% render_field userForm.username class="form-control"
-                                        placeholder="Username" %} {% endcomment %}
+                                        {% render_field userform.username required="required" class="form-control" placeholder="USER NAME"%}
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="ADDRESS" required>
-                                        {% comment %} {% render_field patientForm.address class="form-control"
-                                        placeholder="Address" %} {% endcomment %}
+                                        {% render_field patientform.address class="form-control" placeholder="ADDRESS"%}
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="SYMPTOMS" required>
-                                        {% comment %} {% render_field patientForm.symptoms class="form-control"
-                                        placeholder="Symptoms" %} {% endcomment %}
+                                        {% render_field patientform.symptoms required="required" class="form-control" placeholder="SYMPTOMS"%}
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="PROFILE PICTURE" required>
-                                        {% comment %} {% render_field patientForm.profile_pic required="required"
-                                        class="form-control" placeholder="Profile Picture" %}{% endcomment %}
+                                        {% render_field patientform.profile_pic required="required"  class="form-control" placeholder="PROFILE PIC"%}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="LAST NAME" required>
-                                        {% comment %} {% render_field userForm.last_name class="form-control"
-                                        placeholder="Last Name" %} {% endcomment %}
+                                        {% render_field userform.last_name required="required" class="form-control" placeholder="LAST NAME"%}
                                     </div>
                                     <div class="form-group">
-                                        <input id="password-field" type="password" class="form-control"
-                                            placeholder="Password" required>
-                                        {% comment %} {% render_field userForm.password class="form-control"
-                                        placeholder="Password" %} {% endcomment %}
+                                        {% render_field userform.password  required="required" class="form-control" placeholder="PASSWORD"%}
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="USER NAME" required>
-                                        {% comment %} {% render_field userForm.username class="form-control"
-                                        placeholder="Username" %} {% endcomment %}
+                                        {% render_field patientform.mobile pattern="[6789][0-9]{9}" required="required" class="form-control" placeholder="MOBILE NUMBER"%}
                                     </div>
                                     <div class="form-group">
-                                        <input type="number" class="form-control" placeholder="NUMBER" required>
-                                        {% comment %} {% render_field patientForm.mobile class="form-control"
-                                        pattern="[6789][0-9]{9}" placeholder="Mobile Number" %} {% endcomment %}
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="SYMPTOMS" required>
-                                        {% comment %} {% render_field patientForm.symptoms class="form-control"
-                                        placeholder="Symptoms" %} {% endcomment %}
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="DOCTOR" required>
-                                        {% comment %} {% render_field patientForm.assignedDoctorId class="form-control"
-                                        placeholder="Doctor" %}{% endcomment %}
+                                        {% render_field patientform.assignedDoctorid required="required" class="form-control" placeholder="DOCTOR"%}
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <button type="submit" class="form-control btn btn-primary submit px-3">REGISTER</button>
-                                <div class="text-center">Already have an account? <a href="patientlogin">Login here</a>
-                                </div>
-                            </div>
-                        </form>
                     </div>
-                    <!-- </div> -->
+                    <div class="form-group">
+                        <button type="submit" class="form-control btn btn-primary submit px-3">REGISTER</button>
+                        <div class="text-center">Already have an account? <a href="patientlogin">Login here</a>
+                        </div>
+                    </div>
+                    </form>
                 </div>
+                <!-- </div> -->
+            </div>
     </section>
 
     <script src="static/js/jquery.min.js"></script>
