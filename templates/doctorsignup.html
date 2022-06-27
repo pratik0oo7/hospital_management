@@ -1,0 +1,70 @@
+{% load widget_tweaks %}
+{% include 'base.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+    <title>PATIENT</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body class="img js-fullheight" style="background-image: url(static/bg6.jpg);">
+    <section class="">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    <h2 class="heading-section"> WELCOME.</h2>
+                    <h1>DOCTOR</h1>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                {% comment %} <div class="col-md-6 col-lg-4"> {% endcomment %}
+                    <div class="login-wrap p-0">
+                        <form action="POST" class="signin-form">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                    </div>
+                                    <div class="form-group">
+                                    </div>
+                                    <div class="form-group">
+                                    </div>
+                                    <div class="form-group">
+                                    </div>
+                                    <div class="form-group">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                    </div>
+                                    <div class="form-group">
+                                    </div>
+                                    <div class="form-group">
+                                    </div>
+                                    <div class="form-group">
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="form-control btn btn-primary submit px-3">REGISTER</button>
+                        <div class="text-center">Already have an account? <a href="patientlogin">Login here</a>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <!-- </div> -->
+            </div>
+    </section>
+
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/popper.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/js/main.js"></script>
+
+</body>
+
+
+{% endblock content %}

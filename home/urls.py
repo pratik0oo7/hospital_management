@@ -28,7 +28,10 @@ urlpatterns = [
 
     #regitration and login
     path('registration', views.registration, name='registration'),
-    #patient
+    # patient
     path('patientlogin', views.patientlogin, name='patientlogin'),
     path('patientsignup', views.patientsignup, name='patientsignup'),
+    # Doctor
+    path('doctorlogin', views.doctorlogin, name='doctorlogin'),
+    path('doctorsignup', views.doctorsignup, name='doctorsignup'),
 ]
