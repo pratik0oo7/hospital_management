@@ -13,6 +13,9 @@ class patientuserform(forms.ModelForm):
 
 
 class patientform(forms.ModelForm):
+    assignedDoctorId = forms.ModelChoiceField(queryset=models.Doctor.objects.all(
+    ).filter(status=True), empty_label="Name and Department", to_field_name="user_id")
+
     class Meta:
         model = models.Patient
         fields = ['address', 'symptoms', 'profile_pic', 'mobile', 'status']

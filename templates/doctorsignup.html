@@ -19,53 +19,52 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-                {% comment %} <div class="col-md-6 col-lg-4"> {% endcomment %}
-                    <div class="login-wrap p-0">
-                        <form action="POST" class="signin-form">
-                            {% csrf_token %}
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        {% render_field userform.first_name required="required" class="form-control" placeholder="FIRST NAME"%}
-                                    </div>
-                                    <div class="form-group">
-                                        {% render_field userform.username required="required" class="form-control" placeholder="USER NAME"%}
-                                    </div>
-                                    <div class="form-group">
-                                        {% render_field doctorform.address required="required" class="form-control" placeholder="ADDRESS"%}
-                                    </div>
-                                    <div class="form-group">
-                                        {% render_field doctorform.department required="required" class="form-control" placeholder="DEPARTMENT"%}
-                                    </div>
-                                    <div class="form-group">
-                                        {% render_field doctorform.profile_pic required="required" class="form-control" placeholder="PROFILE PIC"%}
-                                    </div>
+                <div class="login-wrap p-0">
+                    <form action="{% url 'doctorsignup'%}" method="post" class="signin-form"
+                        enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {% render_field userform.first_name required="required" class="form-control" placeholder="FIRST NAME"%}
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        {% render_field userform.last_name required="required" class="form-control" placeholder="LAST NAME"%}
-                                    </div>
-                                    <div class="form-group">
-                                        {% render_field userform.password required="required" class="form-control" placeholder="PASSWORD"%}
-                                    </div>
-                                    <div class="form-group">
-                                        {% render_field doctorform.mobile required="required" pattern="[6789][0-9]{9}"  class="form-control" placeholder="MOBILE NUMBER"%}
-                                    </div>
-                                    <div class="form-group">
-                                        {% render_field doctorform.exprience required="required" class="form-control" placeholder="EXPRIENCE"%}
-                                    </div>
+                                <div class="form-group">
+                                    {% render_field userform.username required="required" class="form-control" placeholder="USER NAME"%}
+                                </div>
+                                <div class="form-group">
+                                    {% render_field doctorform.address required="required" class="form-control" placeholder="ADDRESS"%}
+                                </div>
+                                <div class="form-group">
+                                    {% render_field doctorform.department required="required" class="form-control" placeholder="DEPARTMENT"%}
+                                </div>
+                                <div class="form-group">
+                                    {% render_field doctorform.profile_pic required="required" class="form-control" placeholder="PROFILE PIC"%}
                                 </div>
                             </div>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="form-control btn btn-primary submit px-3">REGISTER</button>
-                        <div class="text-center">Already have an account? <a href="doctorlogin">Login here</a>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {% render_field userform.last_name required="required" class="form-control" placeholder="LAST NAME"%}
+                                </div>
+                                <div class="form-group">
+                                    {% render_field userform.password required="required" class="form-control" placeholder="PASSWORD"%}
+                                </div>
+                                <div class="form-group">
+                                    {% render_field doctorform.mobile required="required" pattern="[6789][0-9]{9}" class="form-control" placeholder="MOBILE NUMBER"%}
+                                </div>
+                                <div class="form-group">
+                                    {% render_field doctorform.exprience required="required" class="form-control" placeholder="EXPRIENCE"%}
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <button type="submit" class="form-control btn btn-primary submit px-3">REGISTER</button>
+                        </div>
                     </form>
+                    <div class="text-center">Already have an account? <a href="doctorlogin">Login here</a>
+                    </div>
                 </div>
-                <!-- </div> -->
             </div>
+        </div>
     </section>
 
     <script src="static/js/jquery.min.js"></script>
