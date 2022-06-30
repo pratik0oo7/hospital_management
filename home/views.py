@@ -34,10 +34,6 @@ def registration(request):
     return render(request, "registration.html")
 
 
-def patientlogin(request):
-    return render(request, 'patientlogin.html')
-
-
 def patientsignup(request):
     userform = forms.patientuserform()
     patientform = forms.patientform()
@@ -81,3 +77,21 @@ def doctorsignup(request):
             doctor_group[0].user_set.add(user)
         return HttpResponseRedirect('doctorlogin')
     return render(request, 'doctorsignup.html', context=p_context)
+# -----------for checking user is doctor , patient
+
+
+def is_doctor(user):
+    return user.groups.filter(name="DOCTOR").exists()
+
+
+def is_patient(user):
+    return user.groups.filter(name="PATIENT").exists()
+
+# ---------AFTER ENTERING CREDENTIALS WE CHECK WHETHER USERNAME AND PASSWORD IS OF ADMIN,DOCTOR OR PATIENT
+
+
+def afterlogin(request):
+    if is_doctor(request.user):
+        return render(request, 'approval.html')
+    elif is_patient(request.user):
+        return render(request, 'approval.html')
