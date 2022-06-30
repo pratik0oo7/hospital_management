@@ -50,32 +50,38 @@
     }
   </style>
 </head>
-  <div class="grid-container">
-    <div class="grid-item">
-      <div class="card">
-        <img src="{% static "images/admin.png" %}" alt="John" style="width:100%">
-        <p class="title">ADMIN</p>
-        <p><button><a href="adminclick">View</a></button></p>
+
+<body class="img" style="background-image: url(static/bg5.jpg);">
+  <section class="ftco-section">
+    <div class="grid-container">
+      <div class="grid-item">
+        <div class="card">
+          <img src="{% static "images/admin.png" %}" alt="John" style="width:100%">
+          <p class="title">ADMIN</p>
+          <p><button><a href="adminclick">View</a></button></p>
+        </div>
+
+      </div>
+
+      <div class="grid-item">
+        <div class="card">
+          <img src="{% static "images/doctor.png" %}" alt="John" style="width:100%">
+          <p class="title">DOCTOR</p>
+          <p><button><a href="doctorclick">View</a></button></p>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <div class="card">
+          <img src="{% static "images/patient.jpg" %}" alt="John" style="width:100%">
+          <p class="title">PATIENT</p>
+          <p><button><a href="patientclick">View</a></button></p>
+        </div>
       </div>
 
     </div>
+  </section>
+</body>
 
-    <div class="grid-item">
-      <div class="card">
-        <img src="{% static "images/doctor.png" %}" alt="John" style="width:100%">
-        <p class="title">DOCTOR</p>
-        <p><button><a href="doctorclick">View</a></button></p>
-      </div>
-    </div>
-
-    <div class="grid-item">
-      <div class="card">
-        <img src="{% static "images/patient.jpg" %}" alt="John" style="width:100%">
-        <p class="title">PATIENT</p>
-        <p><button><a href="patientclick">View</a></button></p>
-      </div>
-    </div>
-
-  </div>
 
 {% endblock content %}

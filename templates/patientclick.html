@@ -1,26 +1,31 @@
 {% include 'base.html' %}
 {% load static %}
 {% block content %}
+
 <head>
-    <title>Login AS PATIENT</title>
+  <title>Login AS PATIENT</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  </head>
-<div class="jumbotron" style="margin-bottom:0px;">
-  <h1 class="display-4" style="text-align:center;">Hello, PATIENT</h1>
-  <p class="lead">Welcome to Hospital Management System.</p>
-  <hr class="my-4">
-  <p>You can access various features after Login/SignUp.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="patientsignup" role="button">SignUp</a>
-    <a class="btn btn-primary btn-lg" href="patientlogin" role="button">Login</a>
-  </p>
-</div>
+</head>
+
+<body class="img" style="background-image: url(static/bg5.jpg);">
+  <section class="ftco-section">
+    <div style="margin-bottom:0px; text-align:center;">
+      <h1 class="display-4">Hello, PATIENT</h1>
+      <p class="lead">Welcome to Hospital Management System.</p>
+      <hr class="my-4">
+      <p>You can access various features after Login/SignUp.</p>
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="patientsignup" role="button">SignUp</a>
+        <a class="btn btn-primary btn-lg" href="patientlogin" role="button">Login</a>
+      </p>
+    </div>
+  </section>
 
   <script src="static/jquery.min.js"></script>
-<script src="static/popper.js"></script>
-<script src="static/bootstrap.min.js"></script>
-<script src="static/main.js"></script>
+  <script src="static/popper.js"></script>
+  <script src="static/bootstrap.min.js"></script>
+  <script src="static/main.js"></script>
 
-  </body>
+</body>
 {% endblock content %}
