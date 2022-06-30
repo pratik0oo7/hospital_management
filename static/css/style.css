@@ -1976,8 +1976,8 @@ pre code {
 }
 
 .table-hover tbody tr:hover {
-  color: #212529;
-  background-color: rgba(0, 0, 0, 0.075);
+  color: #f8f9fa;
+  background-color: rgba(0, 0, 0, 0.01);
 }
 
 .table-primary,
@@ -2203,7 +2203,7 @@ pre code {
 }
 
 .table-dark.table-hover tbody tr:hover {
-  color: #fff;
+  color: #f8f9fa;
   background-color: rgba(255, 255, 255, 0.075);
 }
 

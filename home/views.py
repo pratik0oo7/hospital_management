@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth, Group
 
-from . import forms
+from . import forms, models
 
 # Create your views here.
 
@@ -19,11 +19,19 @@ def adminclick(request):
 
 
 def doctorclick(request):
-    return render(request, "doctorclick.html")
+    doctors = models.Doctor.objects.all().order_by('-id')
+    p_context = {
+        'doctors': doctors
+    }
+    return render(request, "doctorclick.html", context=p_context)
 
 
 def patientclick(request):
-    return render(request, "patientclick.html")
+    patients = models.Patient.objects.all().order_by('-id')
+    p_context = {
+        'patients': patients,
+    }
+    return render(request, "patientclick.html", context=p_context)
 
 # home pages views end here
 

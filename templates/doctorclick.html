@@ -8,9 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 
-<body class="img" style="background-image: url(static/bg2.jpg);">
-  <section class="ftco-section">
-    <div style="margin-bottom:0px; text-align:center;">
+<body class="img" style="background-image: url({% static 'bg3.jpg' %});">
+  <section class="ftco-section" style="margin-bottom:0px; text-align:center;">
+    <div >
       <h1 class="display-4">Hello, DOCTOR</h1>
       <p class="lead">Welcome to Hospital Management System.</p>
       <hr class="my-4">
@@ -19,6 +19,38 @@
         <a class="btn btn-primary btn-lg" href="doctorsignup" role="button">SignUp</a>
         <a class="btn btn-primary btn-lg" href="doctorlogin" role="button">Login</a>
       </p>
+    </div>
+    <div class="container">
+      <h1 class="display-4">Total. DOCTOR</h1>
+      <div class="row">
+        <div class="col-md" style="margin-top:1%;">
+            <table class="table table-hover" id="dev_table">
+              <thead>
+                <tr>
+                  <th>NAME</th>
+                  <th>DEPARTMENT</th>
+                  <th>MOBILE</th>
+                  <th>EXPRIENCE</th>
+                  <th>STATUS</th>
+                </tr>
+              </thead>
+              {% for D in doctors %}
+              <tr>
+                <td>{{D.get_name}}</td>
+                <td>{{D.department}}</td>
+                <td>{{D.mobile}}</td>
+                <td>{{D.exprience}}</td>
+                  {% if D.status %}
+                  <td><span class="btn btn-primary badge">PERMNENT</span></td>
+                  {% else %}
+                  <td><span class="btn btn-success badge">ON HOLD</span></td>
+                  {% endif %}
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
