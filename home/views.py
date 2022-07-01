@@ -2,6 +2,8 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth, Group
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 from . import forms, models
 
@@ -42,6 +44,32 @@ def registration(request):
     return render(request, "registration.html")
 
 
+def patientlogin(request):
+    form = forms.loginForm(request.POST or None)
+    msg = None
+    if request.method == "POST":
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                if is_patient(request.user):
+                    accountapproval = models.Patient.objects.all().filter(
+                        user_id=request.user.id, status=True)
+                    if accountapproval:
+                        return redirect('patient_dashboard')
+                    else:
+                        return render(request, 'approval.html')
+                else:
+                    msg = 'anathorized credentials '
+            else:
+                msg = 'invalid credentials '
+        else:
+            msg = 'error validating form'
+    return render(request, 'patientlogin.html', {'form': form, 'msg': msg})
+
+
 def patientsignup(request):
     userform = forms.patientuserform()
     patientform = forms.patientform()
@@ -59,12 +87,35 @@ def patientsignup(request):
             patient = patient.save()
             my_patient_group = Group.objects.get_or_create(name='PATIENT')
             my_patient_group[0].user_set.add(user)
-        return HttpResponseRedirect('patientlogin')
+            return HttpResponseRedirect('patientlogin')
     return render(request, 'patientsignup.html', context=p_context)
 
 
 def doctorlogin(request):
-    return render(request, 'doctorlogin.html')
+    form = forms.loginForm(request.POST or None)
+    msg = None
+    if request.method == "POST":
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                if is_doctor(request.user):
+                    accountapproval = models.Doctor.objects.all().filter(
+                        user_id=request.user.id, status=True)
+                    if accountapproval:
+                        return redirect('doctor_dashboard')
+                    else:
+                        return render(request, 'approval.html')
+                else:
+                    msg = 'anathorized credentials '
+            else:
+                msg = 'invalid credentials '
+        else:
+            msg = 'error validating form'
+
+    return render(request, 'doctorlogin.html', {'form': form, 'msg': msg})
 
 
 def doctorsignup(request):
@@ -83,7 +134,7 @@ def doctorsignup(request):
             doctor = doctor.save()
             doctor_group = Group.objects.get_or_create(name='DOCTOR')
             doctor_group[0].user_set.add(user)
-        return HttpResponseRedirect('doctorlogin')
+            return HttpResponseRedirect('doctorlogin')
     return render(request, 'doctorsignup.html', context=p_context)
 # -----------for checking user is doctor , patient
 
@@ -95,11 +146,29 @@ def is_doctor(user):
 def is_patient(user):
     return user.groups.filter(name="PATIENT").exists()
 
-# ---------AFTER ENTERING CREDENTIALS WE CHECK WHETHER USERNAME AND PASSWORD IS OF ADMIN,DOCTOR OR PATIENT
+# ---------------------------------------------------------------------------------
+# ------------------------ PATIENT RELATED VIEWS START ------------------------------
+# ---------------------------------------------------------------------------------
 
 
-def afterlogin(request):
-    if is_doctor(request.user):
-        return render(request, 'approval.html')
-    elif is_patient(request.user):
-        return render(request, 'approval.html')
+@login_required(login_url='patientlogin')
+@user_passes_test(is_patient)
+def patient_dashboard(request):
+    patient = models.Patient.objects.get(user_id=request.user.id)
+    doctor = models.Doctor.objects.get(user_id=patient.assignedDoctorId)
+    mydict = {
+        'patient': patient,
+        'doctorName': doctor.get_name,
+        'doctorMobile': doctor.mobile,
+        'doctorAddress': doctor.address,
+        'symptoms': patient.symptoms,
+        'doctorDepartment': doctor.department,
+        'admitDate': patient.admitDate,
+    }
+    return render(request, 'patient_dashboard.html', context=mydict)
+
+
+@login_required(login_url='doctorlogin')
+@user_passes_test(is_doctor)
+def doctor_dashboard(request):
+    return render(request, 'patient_dashboard.html')

@@ -30,16 +30,21 @@ urlpatterns = [
     #regitration and login
     path('registration', views.registration, name='registration'),
     # patient
-    path('patientlogin', LoginView.as_view(
-        template_name='patientlogin.html'), name='patientlogin'),
+    path('patientlogin', views.patientlogin, name='patientlogin'),
     path('patientsignup', views.patientsignup, name='patientsignup'),
     # Doctor
-    path('doctorlogin', LoginView.as_view(
-        template_name='doctorlogin.html'), name='doctorlogin'),
+    path('doctorlogin', views.doctorlogin, name='doctorlogin'),
     path('doctorsignup', views.doctorsignup, name='doctorsignup'),
 
-    # afterlogin
-    path('afterlogin', views.afterlogin, name='afterlogin'),
     # logout
-    path('logout', LoginView.as_view(template_name="home.html"), name="logout")
+    path('logout', LoginView.as_view(template_name="home.html"), name="logout"),
+
+]
+# doctor-related pattaren
+urlpatterns += [
+    path('doctor_dashboard', views.doctor_dashboard, name="doctor_dashboard")
+]
+# patient-related pattaren
+urlpatterns += [
+    path('patient_dashboard', views.patient_dashboard, name="patient_dashboard")
 ]
