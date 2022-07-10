@@ -1,0 +1,109 @@
+{% extends 'doctor_base.html' %}
+{% load static %}
+{% block content %}
+
+<body>
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="overview-wrap">
+                            <h2 class="title-1">overview of your Appointment</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-t-25">
+                    <div class="col-sm-1 col-lg-6">
+                        <div class="overview-item overview-item--c1">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix">
+                                    <a href="/doctor_view_appointment">
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-calendar"></i>
+                                        </div>
+                                        <div class="text">
+                                            <h2>
+                                            <span>View Your Appointment</span>
+                                        </h2>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="overview-chart">
+                                    <canvas id="widgetChart1"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1 col-lg-6">
+                        <div class="overview-item overview-item--c6">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix">
+                                    <a href="/doctor_book_appointment">
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-book"></i>
+                                        </div>
+                                        <div class="text">
+                                            <h2>
+                                            <span>Book Appointment</span>
+                                        </h2>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="overview-chart">
+                                    <canvas id="widgetChart2"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1 col-lg-6">
+                        <div class="overview-item overview-item--c5">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix">
+                                    <a href="/doctor_approve_appointment">
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-check"></i>
+                                        </div>
+                                        <div class="text">
+                                            <h2>
+                                            <span>Approve Appointment</span>
+                                        </h2>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="overview-chart">
+                                    <canvas id="widgetChart2"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1 col-lg-6">
+                        <div class="overview-item overview-item--c3">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix">
+                                    <a href="/doctor_delete_appointment">
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-delete"></i>
+                                        </div>
+                                        <div class="text">
+                                            <h2>
+                                            <span>Delete Appointment</span>
+                                        </h2>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="overview-chart">
+                                    <canvas id="widgetChart2"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock content %}

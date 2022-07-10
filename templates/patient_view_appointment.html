@@ -1,0 +1,60 @@
+{% extends 'patient_base.html' %}
+{% load static %}
+{% block content %}
+
+<body>
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="overview-wrap">
+                            <h2 class="title-1">View of your Appointment</h2>
+                        </div>
+                    </div>
+                </div>
+                {% if msg %}
+                <div class="row">
+                  <div class="col-md-12">
+                      <div class="welcome2-inner m-t-60">
+                          <div class="welcome2-greeting">
+                              <h1 class="title-6">Hi
+                                  <span>{{request.user.first_name}}</span>, Thank You
+                              </h1>
+                              <p>We are glad to see you,{{msg}}</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              {% endif %}
+              <div class="container">
+                    <div class="table-responsive table--no-card m-b-40">
+                      <table class="table table-borderless table-striped table-earning" id="dev-table">
+                        <thead>
+                          <tr>
+                            <th>Doctor Name</th>
+                            <th>Description</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        {% for a in appointment %}
+                        <tr>
+                          <td> {{a.doctorName}}</td>
+                          <td>{{a.description}}</td>
+                          <td>{{a.appointmentDate}}</td>
+                          {% if a.status %}
+                          <td><span class="btn btn-primary badge">CONFIRMED</span></td>
+                          {% else %}
+                          <td><span class="btn btn-success badge">PENDING</span></td>
+                          {% endif %}
+                        </tr>
+                        {% endfor %}
+                      </table>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock content %}

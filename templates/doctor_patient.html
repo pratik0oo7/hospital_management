@@ -1,0 +1,97 @@
+{% extends 'doctor_base.html' %}
+{%load static%}
+{% block content %}
+
+<body>
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="overview-wrap">
+                            <h2 class="title-1">overview of your Doctor</h2>
+                        </div>
+                        <div class="container ">
+                            <br>
+                                <form  action="/searchdoctor" method="get" style="margin-left:70%;" class="form-inline my-2 my-lg-0 ">
+                                    <input class="form-control mr-sm-2" type="search" placeholder="Search" name="query" id="query" aria-label="Search">
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                  </form>
+
+                         
+                        
+                            {% if doctors %}
+                            <div class="">
+                                <h2 class="title-1 m-b-25"> Total Doctor</h2>
+                                <div class="table-responsive table--no-card m-b-40">
+                                    <table class="table table-borderless table-striped table-earning">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Profile Picture</th>
+                                                <th>Mobile</th>
+                                                <th class="text-right">Address</th>
+                                                <th class="text-right">Department</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for d in doctors %}
+                                            <tr>
+                        
+                                                <td> {{d.get_name}}</td>
+                                                <td> <img src="{% static d.profile_pic.url %}" alt="Profile Pic" height="40px"
+                                                        width="40px" /></td>
+                                                <td>{{d.mobile}}</td>
+                                                <td>{{d.address}}</td>
+                                                <td>{{d.department}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="">
+                                <h2 class="title-1 m-b-25">Doctor Assigned</h2>
+                                <div class="table-responsive table--no-card m-b-40">
+                                    <table class="table table-borderless table-striped table-earning">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Profile Picture</th>
+                                                <th>Mobile</th>
+                                                <th>Address</th>
+                                                <th>Department</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% comment %} {% for D in doctor %} {% endcomment %}
+                                            <tr>
+                                                <td> {{doctor.get_name}}</td>
+                                                <td> <img src="{% static doctor.profile_pic.url %}" alt="Profile Pic" height="40px"
+                                                    width="40px" /></td>
+                                                <td>{{doctor.mobile}}</td>
+                                                <td>{{doctor.address}}</td>
+                                                <td>{{doctor.department}}</td>
+                                            </tr>
+                                            {% comment %} {% endfor %} {% endcomment %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            {%else%}
+                            <br><br><br>
+                            <h4 style="text-align: center;color: rgb(255, 64, 64);">No Doctor Found !!!</h4>
+                            {% endif %}
+                        
+                        
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+{% endblock content %}

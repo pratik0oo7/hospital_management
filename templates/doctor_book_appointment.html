@@ -1,0 +1,62 @@
+{% extends 'doctor_base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+<body>
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="overview-wrap">
+                            <h2 class="title-1">Book of your Appointment</h2>
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+                {% if message %}
+                <script>
+                    var a = "{{message}}";
+                    alert(a);
+                </script>
+
+                {% endif %}
+
+
+                <!------ add appointment page by patient(sumit)  ---------->
+                <form action='doctor_book_appointment' method="post">
+                    {% csrf_token %}
+                    <div class="container register-form">
+                        <div class="form">
+                            <div class="note">
+                                <p>Book Appointment Details</p>
+                            </div>
+                            <div class="form-content">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            {% render_field appointmentForm.description class="form-control" placeholder="Description" %}
+                                          </div>
+                                          <div class="form-group">
+                                            {% render_field appointmentForm.doctorId class="form-control" placeholder="doctor" %}
+                                          </div>
+                                          <div class="form-group">
+                                            {% render_field appointmentForm.patientId class="form-control" placeholder="patient" %}
+                                          </div>
+
+                                    </div>
+
+                                </div>
+                                <button type="submit" class="btn btn-primary">BOOK</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+{% endblock content %}

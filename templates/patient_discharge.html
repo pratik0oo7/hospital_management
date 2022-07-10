@@ -1,0 +1,148 @@
+{% extends 'patient_base.html' %}
+{% load static %}
+{% block content %}
+
+<body>
+  <div class="main-content">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="overview-wrap">
+              <h2 class="title-1">Details of your Discharge </h2>
+            </div>
+          </div>
+        </div>
+        <br><br>
+        {%if is_discharged%}
+        <div class="invoice-box">
+          <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+              <td colspan="2">
+                <table>
+                  <tr>
+                    <td class="title">
+                      <h1>Hospital Management</h1>
+                    </td>
+
+                    <td>
+
+                      Admit Date: {{admitDate}}<br>
+                      Release Date: {{releaseDate}}<br>
+                      Days Spent: {{daySpent}}
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr class="information">
+              <td colspan="2">
+                <table>
+                  <tr>
+                    <td>
+                      Patient Name : {{patientName}}<br>
+                      Patient Mobile : {{mobile}}<br>
+                      Patient Addres : {{address}}<br>
+                    </td>
+
+                    <td>
+                      Doctor Name :<br>
+                      {{assignedDoctorName}}<br>
+
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr class="heading">
+              <td>
+                Disease and Symptoms
+              </td>
+              <td>
+
+              </td>
+
+            </tr>
+
+            <tr class="details">
+              <td>
+                {{symptoms}}
+              </td>
+            </tr>
+            <tr class="heading">
+              <td>
+                Item
+              </td>
+
+              <td>
+                Price
+              </td>
+            </tr>
+
+            <tr class="item">
+              <td>
+                Room Charge of {{daySpent}} Days
+              </td>
+
+              <td>
+                {{roomCharge}}
+              </td>
+            </tr>
+
+            <tr class="item">
+              <td>
+                Doctor Fee
+              </td>
+
+              <td>
+                {{doctorFee}}
+              </td>
+            </tr>
+
+            <tr class="item">
+              <td>
+                Medicine Cost
+              </td>
+
+              <td>
+                {{medicineCost}}
+              </td>
+            </tr>
+
+            <tr class="item last">
+              <td>
+                Other Charge
+              </td>
+
+              <td>
+                {{OtherCharge}}
+              </td>
+            </tr>
+
+            <tr class="total">
+              <td></td>
+
+              <td>
+                Total Rupees : {{total}}
+              </td>
+            </tr>
+
+          </table>
+        </div>
+        <br><br>
+        <div class="download">
+          <a style="background:red; width:500px;" href="{% url 'download-pdf' patientId  %}">Download</a>
+        </div>
+        {%else%}
+        <h5 style="text-align:center;">You Are Not Discharged By Hospital !</h5>
+        <h5 style="text-align:center;">Your Treatment Is Going On !</h5><br><br>
+        <h6 style="text-align:center;">When You Will Be Discahrged. You Can Download Invoice.</h6>
+        {%endif%}
+        <br><br><br><br><br><br><br><br>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock content %}
