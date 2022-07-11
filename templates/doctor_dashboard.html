@@ -2,4 +2,56 @@
 {% load static %}
 {% block content %}
 {%include 'doctor_dashboard_card.html'%}
+
+<body>
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="overview-wrap">
+                            <h2 class="title-1">Recent Doctor's Appointment</h2>
+                        </div>
+                        <div class="container ">
+                            {% if appointments %}
+                                <div class="">
+                                    <br>
+                                    <div class="table-responsive table--no-card m-b-40">
+                                        <table class="table table-borderless table-striped table-earning">
+                                            <thead>
+                                                <tr>
+                                                    <th>Patient Name</th>
+                                                    <th>Picture</th>
+                                                    <th>Description</th>
+                                                    <th>Mobile</th>
+                                                    <th>Address</th>
+                                                    <th>Appointment Date</th>
+                                                </tr>
+                                            </thead>
+                                            {% for a,p in appointments %}
+                                            <tr>
+                                                <td>{{a.patientName}}</td>
+                                                <td> <img src="{% static p.profile_pic.url %}" alt="Profile Pic"
+                                                        height="40px" width="40px" /></td>
+                                                <td>{{a.description}}</td>
+                                                <td>{{p.mobile}}</td>
+                                                <td>{{p.address}}</td>
+                                                <td>{{a.appointmentDate}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </table>
+                                    </div>
+                                </div>
+                            {%else%}
+                                <br><br><br>
+                                <h4 style="text-align: center;color: rgb(255, 64, 64);">No Recent Appointment Found !!!</h4>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 {% endblock content %}

@@ -25,7 +25,7 @@
 
 
                 <!------ add appointment page by patient(sumit)  ---------->
-                <form action='doctor_book_appointment' method="post">
+                <form action="{% url 'doctor_book_appointment' %}" method="post">
                     {% csrf_token %}
                     <div class="container register-form">
                         <div class="form">

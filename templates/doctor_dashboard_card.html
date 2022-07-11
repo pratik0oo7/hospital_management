@@ -16,16 +16,16 @@
         </div>
         <div class="row m-t-25">
           <div class="col-sm-1 col-lg-6">
-            <div class="overview-item overview-item--c1">
+            <div class="overview-item overview-item--c3">
               <div class="overview__inner">
                 <div class="overview-box clearfix">
                   <div class="icon">
                     <i class="zmdi zmdi-account-o"></i>
                   </div>
                   <div class="text">
-                    <h3>{{doctorcount}}</h3>
-                    <h4>Total Doctor</h4>
-                    <p>Approval Required : {{pendingdoctorcount}}</p>
+                    <h2>{{patientcount}}</h2>
+                    <span>Total Patient</span>
+                    <p>Wants to Admit : {{pendingpatientcount}}</p>
                   </div>
                 </div>
                 <div class="overview-chart">
@@ -42,8 +42,9 @@
                     <i class="zmdi zmdi-info"></i>
                   </div>
                   <div class="text">
-                    <h2>{{symptoms}}</h2>
-                    <span>Symptoms</span>
+                    <h2>{{appointmentcount}}</h2>
+                    <span>Total Appointment</span>
+                    <p>wants to Approve :{{pendingappointmentcount}} </p>
                   </div>
                 </div>
                 <div class="overview-chart">
@@ -53,15 +54,15 @@
             </div>
           </div>
           <div class="col-sm-1 col-lg-6">
-            <div class="overview-item overview-item--c3">
+            <div class="overview-item overview-item--c1">
               <div class="overview__inner">
                 <div class="overview-box clearfix">
                   <div class="icon">
-                    <i class="zmdi zmdi-phone"></i>
+                    <i class="zmdi zmdi-calendar"></i>
                   </div>
                   <div class="text">
-                    <h2>{{doctorMobile}}</h2>
-                    <span>Doctor Mobile</span>
+                    <h2>{{appointmentcount}}</h2>
+                    <span>Appointments For You</span>
                   </div>
                 </div>
                 <div class="overview-chart">
@@ -75,11 +76,11 @@
               <div class="overview__inner">
                 <div class="overview-box clearfix">
                   <div class="icon">
-                    <i class="zmdi zmdi-map"></i>
+                    <i class="zmdi zmdi-accounts"></i>
                   </div>
                   <div class="text">
-                    <h2>{{doctorAddress}}</h2>
-                    <span>Doctor Address</span>
+                    <h2>{{patientcount}}</h2>
+                    <span>Patient Under You</span>
                   </div>
                 </div>
                 <div class="overview-chart">
@@ -93,29 +94,11 @@
               <div class="overview__inner">
                 <div class="overview-box clearfix">
                   <div class="icon">
-                    <i class="zmdi zmdi-city"></i>
+                    <i class="zmdi zmdi-run"></i>
                   </div>
                   <div class="text">
-                    <h2>{{doctorDepartment}}</h2>
-                    <span>Doctor Department</span>
-                  </div>
-                </div>
-                <div class="overview-chart">
-                  <canvas id="widgetChart5"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-1 col-lg-6">
-            <div class="overview-item overview-item--c6">
-              <div class="overview__inner">
-                <div class="overview-box clearfix">
-                  <div class="icon">
-                    <i class="zmdi zmdi-calendar"></i>
-                  </div>
-                  <div class="text">
-                    <h2>{{admitDate}}</h2>
-                    <span>Admit Date</span>
+                    <h2>{{patientdischarged}}</h2>
+                    <span>Your Patient Discharged</span>
                   </div>
                 </div>
                 <div class="overview-chart">

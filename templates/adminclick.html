@@ -7,8 +7,8 @@
     <hr class="my-4">
     <p>You can access various features after Login/SignUp.</p>
     <p class="lead">
-      <a class="btn btn-primary btn-lg" href="doctorsignup" role="button">SignUp</a>
-      <a class="btn btn-primary btn-lg" href="doctorlogin" role="button">Login</a>
+      <a class="btn btn-primary btn-lg" href="{% url 'doctorsignup' %}" role="button">SignUp</a>
+      <a class="btn btn-primary btn-lg" href="{% url 'doctorlogin' %}" role="button">Login</a>
     </p>
   </div>
 {% endblock content %}

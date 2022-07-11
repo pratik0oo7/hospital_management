@@ -5,10 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>welcome to HOSPITAL</title>  </head>
-    
-    </style>
   <body>
-    <nav class="navbar navbar-expand-lg bg-transparent " >
+    <nav class="navbar navbar-expand-lg bg-transparent" >
       <div class="container-fluid">
         <a class="navbar-brand" href="/">
             <img src="{% static 'logo.png' %}" alt="logo" width="70" height="50" class="d-inline-block align-text-top">
@@ -16,19 +14,19 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse align" id="navbarNav"">
+        <div class="collapse navbar-collapse align" id="navbarNav">
           <ul class="navbar-nav justify-content-center" >
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="/">HOME</a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="/doctorclick">DOCTOR</a>
+                <a class="nav-link" href="{% url 'doctorclick' %}">DOCTOR</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/patientclick">PATIENT</a>
+              <a class="nav-link" href="{% url 'patientclick' %}">PATIENT</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/registration">REGITRATION</a>
+                <a class="nav-link" href="{% url 'registration' %}">REGITRATION</a>
               </li>
             <li class="nav-item">
               <a class="nav-link disabled"></a>
@@ -38,5 +36,4 @@
       </div>
     </nav>
   </body>
-
 </html>

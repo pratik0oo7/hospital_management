@@ -9,89 +9,140 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="overview-wrap">
-                            <h2 class="title-1">overview of your Doctor</h2>
+                            <h2 class="title-1">overview of your Patient</h2>
                         </div>
-                        <div class="container ">
-                            <br>
-                                <form  action="/searchdoctor" method="get" style="margin-left:70%;" class="form-inline my-2 my-lg-0 ">
-                                    <input class="form-control mr-sm-2" type="search" placeholder="Search" name="query" id="query" aria-label="Search">
-                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                                  </form>
-
-                         
-                        
-                            {% if doctors %}
-                            <div class="">
-                                <h2 class="title-1 m-b-25"> Total Doctor</h2>
-                                <div class="table-responsive table--no-card m-b-40">
-                                    <table class="table table-borderless table-striped table-earning">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Profile Picture</th>
-                                                <th>Mobile</th>
-                                                <th class="text-right">Address</th>
-                                                <th class="text-right">Department</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for d in doctors %}
-                                            <tr>
-                        
-                                                <td> {{d.get_name}}</td>
-                                                <td> <img src="{% static d.profile_pic.url %}" alt="Profile Pic" height="40px"
-                                                        width="40px" /></td>
-                                                <td>{{d.mobile}}</td>
-                                                <td>{{d.address}}</td>
-                                                <td>{{d.department}}</td>
-                                            </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
+                    </div>
+                </div>
+                <div class="row m-t-25">
+                    <div class="col-sm-1 col-lg-6">
+                        <div class="overview-item overview-item--c3">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix">
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-account-o"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h2>{{patientcount}}</h2>
+                                        <span>Total Patient</span>
+                                        <p>Wants to Admit : {{pendingpatientcount}}</p>
+                                    </div>
+                                </div>
+                                <div class="overview-chart">
+                                    <canvas id="widgetChart1"></canvas>
                                 </div>
                             </div>
-                            <div class="">
-                                <h2 class="title-1 m-b-25">Doctor Assigned</h2>
-                                <div class="table-responsive table--no-card m-b-40">
-                                    <table class="table table-borderless table-striped table-earning">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Profile Picture</th>
-                                                <th>Mobile</th>
-                                                <th>Address</th>
-                                                <th>Department</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% comment %} {% for D in doctor %} {% endcomment %}
-                                            <tr>
-                                                <td> {{doctor.get_name}}</td>
-                                                <td> <img src="{% static doctor.profile_pic.url %}" alt="Profile Pic" height="40px"
-                                                    width="40px" /></td>
-                                                <td>{{doctor.mobile}}</td>
-                                                <td>{{doctor.address}}</td>
-                                                <td>{{doctor.department}}</td>
-                                            </tr>
-                                            {% comment %} {% endfor %} {% endcomment %}
-                                        </tbody>
-                                    </table>
+                        </div>
+                    </div>
+                    <div class="col-sm-1 col-lg-6">
+                        <div class="overview-item overview-item--c5">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix">
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-run"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h2>{{patientdischarged}}</h2>
+                                        <span>Your Patient Discharged</span>
+                                    </div>
+                                </div>
+                                <div class="overview-chart">
+                                    <canvas id="widgetChart5"></canvas>
                                 </div>
                             </div>
-                            {%else%}
-                            <br><br><br>
-                            <h4 style="text-align: center;color: rgb(255, 64, 64);">No Doctor Found !!!</h4>
-                            {% endif %}
-                        
-                        
                         </div>
-                        
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="overview-wrap">
+                            <h2 class="title-1">Your Patient's Regards Stuff</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-t-25">
+                    <div class="col-sm-1 col-lg-6">
+                        <div class="overview-item overview-item--c6">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix">
+                                    <a href="{% url 'doctor_add_patient' %}">
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-info"></i>
+                                        </div>
+                                        <div class="text">
+                                            <span>Admit Patient</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="overview-chart">
+                                    <canvas id="widgetChart2"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1 col-lg-6">
+                        <div class="overview-item overview-item--c1">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix">
+                                    <a href="{% url 'doctor_view_patient' %}">
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-calendar"></i>
+                                        </div>
+                                        <div class="text">
+                                            <span>View Patient</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="overview-chart">
+                                    <canvas id="widgetChart3"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1 col-lg-6">
+                        <div class="overview-item overview-item--c4">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix">
+                                    <a href="{% url 'doctor_approve_patient' %}">
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-accounts"></i>
+                                        </div>
+                                        <div class="text">
+                                            <h2>{{pendingpatientcount}}</h2>
+                                            <span>Patient Under You For Approve</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="overview-chart">
+                                    <canvas id="widgetChart4"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1 col-lg-6">
+                        <div class="overview-item overview-item--c2">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix">
+                                    <a href="{% url 'doctor_discharge_patient' %}">
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-accounts"></i>
+                                        </div>
+                                        <div class="text">
+                                            <span>Patient Under Discharge</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="overview-chart">
+                                    <canvas id="widgetChart4"></canvas>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
-
 
 {% endblock content %}

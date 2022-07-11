@@ -1,5 +1,5 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
 <head>
@@ -10,26 +10,26 @@
     <title>Doctor Dashboard</title>
 
     <!-- Fontfaces CSS-->
-    <link href="static/css/font-face.css" rel="stylesheet" media="all">
-    <link href="static/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="static/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="static/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="{% static '/css/font-face.css' %}" rel="stylesheet" media="all">
+    <link href="{% static '/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static '/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static '/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
 
     <!-- Bootstrap CSS-->
-    <link href="static/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="{% static '/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
 
     <!-- Vendor CSS-->
     {% comment %}
     <link href="static/vendor/animsition/animsition.min.css" rel="stylesheet" media="all"> {% endcomment %}
-    <link href="static/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="static/vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="static/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="static/vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="static/vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="static/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <link href="{% static '/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static '/vendor/wow/animate.css" rel="stylesheet' %}" media="all">
+    <link href="{% static '/vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static '/vendor/slick/slick.css" rel="stylesheet' %}" media="all">
+    <link href="{% static '/vendor/select2/select2.min.css" rel="stylesheet' %}" media="all">
+    <link href="{% static '/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-    <link href="static/css/theme.css" rel="stylesheet" media="all">
+    <link href="{% static '/css/theme.css' %}" rel="stylesheet" media="all">
 
 </head>
 
@@ -47,7 +47,7 @@
                         <div class="account2">
                             <div class="account2">
                                 <div class="image img-cir img-120">
-                                    <img src="{% static doctor.profile_pic.url %}" alt="{{patient.profile_pic.url}}" />
+                                    <img src="{% static doctor.profile_pic.url %}" alt="Profile Pic" />
                                 </div>
                                 <h4 class="name">{{doctor.get_name}}</h4>
                                 <a href="/logout">Logout</a>
@@ -64,16 +64,12 @@
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
                         <li>
-                            <a href="doctor_appointment">
+                            <a href="{% url 'doctor_appointment' %}">
                                 <i class="fas fa-chart-bar"></i>Appoitment</a>
                         </li>
                         <li>
-                            <a href="doctor_patient">
+                            <a href="{% url 'doctor_patient' %}">
                                 <i class="fas fa-table"></i>Patient</a>
-                        </li>
-                        <li>
-                            <a href="doctor_patient_discharge">
-                                <i class="far fa-check-square"></i>Discharge</a>
                         </li>
                     </ul>
                 </div>
@@ -96,25 +92,21 @@
                         <img src="{% static doctor.profile_pic.url %}" alt="Profile Pic" />
                     </div>
                     <h4 class="name">{{doctor.get_name}}</h4>
-                    <a href="/logout">Logout</a>
+                    <a href="{% url 'logout'%}" >Logout</a>
                 </div>
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
-                            <a class="js-arrow" href="doctor_dashboard">
+                            <a class="js-arrow" href="{% url 'doctor_dashboard' %}">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
                         <li>
-                            <a href="doctor_appointment">
+                            <a href="{% url 'doctor_appointment' %}">
                                 <i class="fas fa-chart-bar"></i>Appoitment</a>
                         </li>
                         <li>
-                            <a href="doctor_patient">
+                            <a href="{% url 'doctor_patient' %}">
                                 <i class="fas fa-table"></i>Patient</a>
-                        </li>
-                        <li>
-                            <a href="doctor_patient_discharge">
-                                <i class="far fa-check-square"></i>Discharge</a>
                         </li>
                     </ul>
                 </nav>
@@ -162,7 +154,7 @@
         </div>
 
     </div>
-    <script src="static/js/main.js"></script>
+    <script src="{% static '/js/main.js' %}"></script>
 
 </body>
 
