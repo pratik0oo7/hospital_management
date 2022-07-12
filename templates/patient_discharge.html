@@ -15,6 +15,8 @@
         </div>
         <br><br>
         {%if is_discharged%}
+ 
+        <br><br><br>
         <div class="invoice-box">
           <table cellpadding="0" cellspacing="0">
             <tr class="top">
@@ -24,48 +26,48 @@
                     <td class="title">
                       <h1>Hospital Management</h1>
                     </td>
-
+        
                     <td>
-
+        
                       Admit Date: {{admitDate}}<br>
-                      Release Date: {{releaseDate}}<br>
-                      Days Spent: {{daySpent}}
+                      Release Date: {{todayDate}}<br>
+                      Days Spent: {{day}}
                     </td>
                   </tr>
                 </table>
               </td>
             </tr>
-
+        
             <tr class="information">
               <td colspan="2">
                 <table>
                   <tr>
                     <td>
-                      Patient Name : {{patientName}}<br>
+                      Patient Name : {{name}}<br>
                       Patient Mobile : {{mobile}}<br>
                       Patient Addres : {{address}}<br>
                     </td>
-
+        
                     <td>
                       Doctor Name :<br>
                       {{assignedDoctorName}}<br>
-
+        
                     </td>
                   </tr>
                 </table>
               </td>
             </tr>
-
+        
             <tr class="heading">
               <td>
                 Disease and Symptoms
               </td>
               <td>
-
+        
               </td>
-
+        
             </tr>
-
+        
             <tr class="details">
               <td>
                 {{symptoms}}
@@ -75,65 +77,67 @@
               <td>
                 Item
               </td>
-
+        
               <td>
                 Price
               </td>
             </tr>
-
+        
             <tr class="item">
               <td>
-                Room Charge of {{daySpent}} Days
+                Room Charge of {{day}} Days
               </td>
-
+        
               <td>
                 {{roomCharge}}
               </td>
             </tr>
-
+        
             <tr class="item">
               <td>
                 Doctor Fee
               </td>
-
+        
               <td>
                 {{doctorFee}}
               </td>
             </tr>
-
+        
             <tr class="item">
               <td>
                 Medicine Cost
               </td>
-
+        
               <td>
                 {{medicineCost}}
               </td>
             </tr>
-
+        
             <tr class="item last">
               <td>
                 Other Charge
               </td>
-
+        
               <td>
                 {{OtherCharge}}
               </td>
             </tr>
-
+        
             <tr class="total">
               <td></td>
-
+        
               <td>
                 Total Rupees : {{total}}
               </td>
             </tr>
-
+        
           </table>
-        </div>
+          <div class="download">
+            <a type="submit" class="btn btn-primary" href="{% url 'download_pdf' patientId  %}">
+            Download
+            </a>
+          </div>
         <br><br>
-        <div class="download">
-          <a style="background:red; width:500px;" href="{% url 'download-pdf' patientId  %}">Download</a>
         </div>
         {%else%}
         <h5 style="text-align:center;">You Are Not Discharged By Hospital !</h5>

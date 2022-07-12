@@ -19,11 +19,7 @@ import io
 
 
 def home(request):
-    return render(request, "home.html")
-
-
-def adminclick(request):
-    return render(request, "adminclick.html")
+    return render(request, "index.html")
 
 
 def doctorclick(request):
@@ -343,11 +339,35 @@ def search_doctor_view(request):
 def patient_discharge(request):
     # for profile picture of patient in sidebar
     patient = models.Patient.objects.get(user_id=request.user.id)
-    patientdict = {
-        'is_discharged': False,
-        'patient': patient,
-        'patientId': request.user.id,
-    }
+    dischargeDetails = models.PatientDischargeDetails.objects.all().filter(
+        patientId=patient.id).order_by('-id')[:1]
+    patientDict = None
+    if dischargeDetails:
+        patientdict = {
+            'is_discharged': True,
+            'patient': patient,
+            'patientId': patient.id,
+            'patientName': patient.get_name,
+            'assignedDoctorName': dischargeDetails[0].assignedDoctorName,
+            'address': patient.address,
+            'mobile': patient.mobile,
+            'symptoms': patient.symptoms,
+            'admitDate': patient.admitDate,
+            'releaseDate': dischargeDetails[0].releaseDate,
+            'daySpent': dischargeDetails[0].daySpent,
+            'medicineCost': dischargeDetails[0].medicineCost,
+            'roomCharge': dischargeDetails[0].roomCharge,
+            'doctorFee': dischargeDetails[0].doctorFee,
+            'OtherCharge': dischargeDetails[0].OtherCharge,
+            'total': dischargeDetails[0].total,
+        }
+        print(patientDict)
+    else:
+        patientdict = {
+            'is_discharged': False,
+            'patient': patient,
+            'patientId': request.user.id,
+        }
     return render(request, 'patient_discharge.html', context=patientdict)
 # ---------------------------------------------------------------------------------
 # ------------------------ DOCTOR RELATED VIEWS START ------------------------------
@@ -658,7 +678,7 @@ def doctor_discharge_patient(request):
 
 @login_required(login_url='doctorlogin')
 @user_passes_test(is_doctor)
-def discharge_patient(request, pk):
+def d_discharge_patient(request, pk):
     patient = models.Patient.objects.get(id=pk)
     # for profile picture of patient in sidebar
     doctor = models.Doctor.objects.get(user_id=request.user.id)
@@ -718,7 +738,7 @@ def render_to_pdf(template_src, context_dict):
     return
 
 
-def download_pdf_view(request, pk):
+def download_pdf(request, pk):
     dischargeDetails = models.PatientDischargeDetails.objects.all().filter(
         patientId=pk).order_by('-id')[:1]
     dict = {

@@ -24,7 +24,6 @@ urlpatterns = [
     path('', views.home, name='home'),
     # click urls
     path('doctorclick', views.doctorclick, name='doctorclick'),
-    path('adminclick', views.adminclick, name='adminclick'),
     path('patientclick', views.patientclick, name='patientclick'),
 
     #regitration and login
@@ -76,9 +75,9 @@ urlpatterns += [
          views.reject_patient, name='reject_patient'),
     path('doctor_discharge_patient', views.doctor_discharge_patient,
          name='doctor_discharge_patient'),
-    path('discharge_patient/<int:pk>',
-         views.discharge_patient, name='discharge_patient'),
-    path('download_pdf/<int:pk>', views.download_pdf_view, name='download_pdf'),
+    path('d_discharge_patient/<int:pk>',
+         views.d_discharge_patient, name='d_discharge_patient'),
+    path('download_pdf/<int:pk>', views.download_pdf, name='download_pdf'),
 ]
 # patient-related pattaren
 urlpatterns += [
