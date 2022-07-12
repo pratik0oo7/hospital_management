@@ -1,39 +1,38 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
 <body class="img" style="background-image: url(static/bg1.jpg);">
-	<section class="ftco-section">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-6 text-center mb-5">
-					<h1 class="heading-section">WELCOME</h1>
-				</div>
-			</div>
-            <h2 class="mb-4 text-center">TO</h2>
-			<div class="row justify-content-center">
-				<div class="col-md-6 col-lg-4">
-					<div class="login-wrap p-0">
-		      	<h3 class="mb-4 text-center">Our System</h3>
-		      	<form action="#" class="signin-form">
-		      		<div class="form-group">
-		      			<input type="text" class="form-control" placeholder="Username" required>
-		      		</div>
-	            <div class="form-group">
-	              <input id="password-field" type="password" class="form-control" placeholder="Password" required>
-	              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-	            </div>
-	            <div class="form-group">
-	            	<button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
-	            </div>
-	          </form>
-	          <p class="w-100 text-center">&mdash; Or for new user &mdash;</p>
-	          <div class="social d-flex text-center">
-	          	<a href="#" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> SIGN UP / NEW USER</a>
-	          </div>
-		      </div>
-				</div>
-			</div>
+	<section class="ftco-section" style="text-align:center;">
+		<div>
+			<h1 class="display-4">Hello, Sir...</h1>
+			<h2 class="lead">Welcome to Hospital Management System.</h2>
+			<p>You can access various features after Login/SignUp as per your identity</p>
 		</div>
 	</section>
-{% include "cards.html" %}  
+	<br><br>
+	<footer>
+
+		<p>
+		  <a href="https://facebook.com/" class="fa fa-facebook"></a>
+		  <a href="https://api.whatsapp.com/send?phone=+91951293091&text=Hello%20pratik.%0d%0aHow%20are%20you%20%3f%0d%0aI%20came%20from%20your%20website.&source=&data=#"
+			class="fa fa-whatsapp"></a>
+		  <a href="https://instagram.com/pratik_mendapara" class="fa fa-instagram"></a>
+		  <a href="https://twitter.com/" class="fa fa-twitter"></a>
+		</p>
+	  
+		<br>
+		<div class="container">
+		  <div class="row">
+	  
+			<div class="col-md-12 col-sm-12">
+			  <div style="color:#ffffff;" class="wow fadeInUp footer-copyright">
+				<p>Made in India <br>
+				  Copyright &copy; 2020 LazyCoder </p>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </footer>
+	</body>  
 {% endblock content %}

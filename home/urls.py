@@ -36,6 +36,10 @@ urlpatterns = [
     path('doctorlogin', views.doctorlogin, name='doctorlogin'),
     path('doctorsignup', views.doctorsignup, name='doctorsignup'),
 
+    # admin
+    path('adminlogin', views.adminlogin, name='adminlogin'),
+    path('adminsignup', views.adminsignup, name='adminsignup'),
+
     # logout
     path('logout', LoginView.as_view(template_name="home.html"), name="logout"),
 
@@ -62,7 +66,7 @@ urlpatterns += [
     path('doctor_add_patient', views.doctor_add_patient, name='doctor_add_patient'),
     path('doctor_view_patient', views.doctor_view_patient,
          name='doctor_view_patient'),
-    path('delete_patient_from_hospital<int:pk>', views.delete_patient_from_hospital,
+    path('delete_patient_from_hospital/<int:pk>', views.delete_patient_from_hospital,
          name='delete_patient_from_hospital'),
     path('doctor_approve_patient',
          views.doctor_approve_patient, name='doctor_approve_patient'),
@@ -89,4 +93,38 @@ urlpatterns += [
     path('patient_doctor', views.patient_doctor, name="patient_doctor"),
     path('patient_discharge', views.patient_discharge, name='patient_discharge'),
     path('searchdoctor', views.search_doctor_view, name='searchdoctor'),
+]
+
+
+# admin-related pattaren
+urlpatterns += [
+    path('admin_dashboard', views.admin_dashboard, name="admin_dashboard"),
+    path('admin_doctor', views.admin_doctor, name="admin_doctor"),
+    path('admin_view_doctor', views.admin_view_doctor,
+         name="admin_view_doctor"),
+    path('delete_doctor_from_hospital/<int:pk>', views.delete_doctor_from_hospital,
+         name='delete_doctor_from_hospital'),
+    path('admin_add_doctor', views.admin_add_doctor,
+         name="admin_add_doctor"),
+    path('approve_doctor/<int:pk>',
+         views.approve_doctor, name='approve_doctor'),
+    path('reject_doctor/<int:pk>',
+         views.reject_doctor, name='reject_doctor'),
+    path('admin_approve_doctor', views.admin_approve_doctor,
+         name="admin_approve_doctor"),
+    path('admin_doctor_specialisation', views.admin_doctor_specialisation,
+         name='admin_doctor_specialisation'),
+    path('admin_patient', views.admin_patient, name='admin_patient'),
+    path('admin_view_patient', views.admin_view_patient,
+         name="admin_view_patient"),
+    path('delete_patient_from_hospital/<int:pk>', views.delete_patient_from_hospital,
+         name='delete_patient_from_hospital'),
+    path('admin_add_patient', views.admin_add_patient,
+         name="admin_add_patient"),
+    path('approve_patient/<int:pk>',
+         views.approve_patient, name='approve_patient'),
+    path('reject_patient/<int:pk>',
+         views.reject_patient, name='reject_patient'),
+    path('admin_approve_patient', views.admin_approve_patient,
+         name="admin_approve_patient")
 ]

@@ -168,6 +168,49 @@ def doctorsignup(request):
             doctor_group[0].user_set.add(user)
             return HttpResponseRedirect('doctorlogin')
     return render(request, 'doctorsignup.html', context=p_context)
+
+
+def adminsignup(request):
+    userform = forms.adminsigupform()
+    adminform = forms.adminform()
+    p_context = {'userform': userform, 'adminform': adminform}
+    if request.method == 'POST':
+        userform = forms.adminsigupform(request.POST)
+        adminform = forms.adminform(request.POST, request.FILES)
+        if userform.is_valid() and adminform.is_valid():
+            user = userform.save()
+            user.set_password(user.password)
+            user.save()
+            admin = adminform.save(commit=False)
+            admin.user = user
+            admin = admin.save()
+            my_admin_group = Group.objects.get_or_create(name='ADMIN')
+            my_admin_group[0].user_set.add(user)
+            return HttpResponseRedirect('adminlogin')
+    return render(request, 'adminsignup.html', context=p_context)
+
+
+def adminlogin(request):
+    form = forms.loginForm(request.POST or None)
+    msg = None
+    if request.method == "POST":
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                if is_admin(request.user):
+                    return redirect('admin_dashboard')
+                else:
+                    msg = 'anathorized credentials '
+            else:
+                msg = 'invalid credentials '
+        else:
+            msg = 'error validating form'
+
+    return render(request, 'adminlogin.html', {'form': form, 'msg': msg})
+
 # -----------for checking user is doctor , patient
 
 
@@ -177,6 +220,10 @@ def is_doctor(user):
 
 def is_patient(user):
     return user.groups.filter(name="PATIENT").exists()
+
+
+def is_admin(user):
+    return user.groups.filter(name="ADMIN").exists()
 
 # ---------------------------------------------------------------------------------
 # ------------------------ PATIENT RELATED VIEWS START ------------------------------
@@ -690,3 +737,298 @@ def download_pdf_view(request, pk):
         'total': dischargeDetails[0].total,
     }
     return render_to_pdf('download_bill.html', dict)
+
+
+# ---------------------------------------------------------------------------------
+# ------------------------ ADMIN RELATED VIEWS START ------------------------------
+# ---------------------------------------------------------------------------------
+
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def admin_dashboard(request):
+    # for profile picture of patient in sidebar
+    admin = models.Admin.objects.get(user_id=request.user.id)
+
+    # for both table in admin dashboard
+    doctors = models.Doctor.objects.all().order_by('-id')
+    patients = models.Patient.objects.all().order_by('-id')
+    # for three cards
+    doctorcount = models.Doctor.objects.all().filter(status=True).count()
+    pendingdoctorcount = models.Doctor.objects.all().filter(status=False).count()
+
+    patientcount = models.Patient.objects.all().filter(status=True).count()
+    pendingpatientcount = models.Patient.objects.all().filter(status=False).count()
+    patientdischarged = models.PatientDischargeDetails.objects.all(
+    ).distinct().filter(assignedDoctorName=request.user.first_name).count()
+    # patients = models.Patient.objects.all().filter(status=True)
+    p_context = {
+        'admin': admin,
+        'doctors': doctors,
+        'patients': patients,
+        'doctorcount': doctorcount,
+        'pendingdoctorcount': pendingdoctorcount,
+        'patientcount': patientcount,
+        'pendingpatientcount': pendingpatientcount,
+        'patientdischarged': patientdischarged
+    }
+    return render(request, 'admin_dashboard.html', context=p_context)
+
+
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def admin_doctor(request):
+    admin = models.Admin.objects.get(user_id=request.user.id)
+    doctorcount = models.Doctor.objects.all().filter(status=True).count()
+    pendingdoctorcount = models.Doctor.objects.all().filter(status=False).count()
+    p_context = {
+        'admin': admin,
+        'doctorcount': doctorcount,
+        'pendingdoctorcount': pendingdoctorcount
+    }
+    return render(request, 'admin_doctor.html', context=p_context)
+
+
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def admin_view_doctor(request):
+    # for profile picture of patient in sidebar
+    admin = models.Admin.objects.get(user_id=request.user.id)
+    doctors = models.Doctor.objects.all().filter(status=True)
+    doctor = models.Doctor.objects.all().filter(status=False)
+    p_context = {
+        'admin': admin,
+        'doctors': doctors,
+        'doctor': doctor
+    }
+    return render(request, 'admin_view_doctor.html', context=p_context)
+
+
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def delete_doctor_from_hospital(request, pk):
+    doctor = models.Doctor.objects.get(id=pk)
+    user = models.User.objects.get(id=doctor.user_id)
+    user.delete()
+    doctor.delete()
+    return redirect('admin_view_doctor')
+
+
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def approve_doctor(request, pk):
+    doctor = models.Doctor.objects.get(id=pk)
+    doctor.status = True
+    doctor.save()
+    return redirect(reverse('admin_approve_doctor'))
+
+
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def reject_doctor(request, pk):
+    doctor = models.Doctor.objects.get(id=pk)
+    user = models.User.objects.get(id=doctor.user_id)
+    user.delete()
+    doctor.delete()
+    return redirect('admin_approve_doctor')
+
+
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def admin_approve_doctor(request):
+    # for profile picture of patient in sidebar
+    admin = models.Admin.objects.get(user_id=request.user.id)
+    doctors = models.Doctor.objects.all().filter(status=False)
+    p_context = {
+        'admin': admin,
+        'doctors': doctors
+    }
+    return render(request, 'admin_approve_doctor.html', context=p_context)
+
+
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def admin_add_doctor(request):
+    # for profile picture of patient in sidebar
+    admin = models.Admin.objects.get(user_id=request.user.id)
+    userform = forms.doctoruserform()
+    doctorform = forms.doctorform()
+    p_context = {'userform': userform,
+                 'doctorform': doctorform, 'admin': admin}
+    if request.method == 'POST':
+        userform = forms.doctoruserform(request.POST)
+        doctorform = forms.doctorform(request.POST, request.FILES)
+        if userform.is_valid() and doctorform.is_valid():
+            user = userform.save()
+            user.set_password(user.password)
+            user.save()
+
+            doctor = doctorform.save(commit=False)
+            doctor.user = user
+            doctor.status = True
+            doctor.save()
+
+            my_doctor_group = Group.objects.get_or_create(name='DOCTOR')
+            my_doctor_group[0].user_set.add(user)
+            data = {
+                'Doctor_Fname': user.first_name,
+                'Doctor_Lname': user.last_name,
+                'Admin_name': admin.get_name,
+                'email': user.email,
+                'Doctor_username': user.username,
+                'Doctor_password': user.password,
+            }
+
+            msg = '''
+            Doctor Name:\t{}\t{}
+            Doctor Email:\t{}
+            Admin Name:\t{}
+
+            Here, Your Details Dcotor, Now you are part of Our Family.. 
+            from Your Portal Doctor...
+            here your Id and Password:\n usrname:\t{}\n Password:\t{}\n
+            '''.format(data['Doctor_Fname'], data['Doctor_Lname'], data['email'], data['Admin_name'], data['Doctor_username'], data['Doctor_password'])
+            send_mail('Your New Appoitment', msg, settings.EMAIL_HOST_USER,
+                      [user.email], fail_silently=False)
+            print(data)
+            print(user.email)
+        return HttpResponseRedirect('admin_view_doctor')
+    return render(request, 'admin_add_doctor.html', context=p_context)
+
+
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def admin_doctor_specialisation(request):
+    doctors = models.Doctor.objects.all().filter(status=True)
+    # for profile picture of patient in sidebar
+    admin = models.Admin.objects.get(user_id=request.user.id)
+    p_context = {
+        'admin': admin,
+        'doctors': doctors
+    }
+    return render(request, 'admin_doctor_specialisation.html', context=p_context)
+
+
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def admin_patient(request):
+    # for profile picture of patient in sidebar
+    admin = models.Admin.objects.get(user_id=request.user.id)
+    patientcount = models.Patient.objects.all().filter(
+        status=True).count()
+    pendingpatientcount = models.Patient.objects.all().filter(
+        status=False).count()
+    patientdischarged = models.PatientDischargeDetails.objects.all(
+    ).count()
+    p_context = {
+        'admin': admin,
+        'patientcount': patientcount,
+        'pendingpatientcount': pendingpatientcount,
+        'patientdischarged': patientdischarged,
+
+    }
+    return render(request, 'admin_patient.html', context=p_context)
+
+
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def admin_view_patient(request):
+    # for profile picture of patient in sidebar
+    admin = models.Admin.objects.get(user_id=request.user.id)
+    patients = models.Patient.objects.all().filter(status=True)
+    patient = models.Patient.objects.all().filter(status=False)
+    p_context = {
+        'admin': admin,
+        'patient': patient,
+        'patients': patients
+    }
+    return render(request, 'admin_view_patient.html', context=p_context)
+
+
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def delete_patient_from_hospital(request, pk):
+    patient = models.Patient.objects.get(id=pk)
+    user = models.User.objects.get(id=patient.user_id)
+    user.delete()
+    patient.delete()
+    return redirect('admin_view_patient')
+
+
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def admin_add_patient(request):
+    # for profile picture of patient in sidebar
+    admin = models.Admin.objects.get(user_id=request.user.id)
+    userform = forms.patientuserform()
+    patientform = forms.patientform()
+    p_context = {'userform': userform, 'patientform': patientform,
+                 'admin': admin}
+    if request.method == "POST":
+        userform = forms.patientuserform(request.POST)
+        patientform = forms.patientform(request.POST, request.FILES)
+        if userform.is_valid() and patientform.is_valid():
+            user = userform.save()
+            user.set_password(user.password)
+            user.save()
+            patient = patientform.save(commit=False)
+            patient.user = user
+            patient.status = True
+            patient.assignedDoctorId = request.POST.get('assignedDoctorId')
+            patient = patient.save()
+            my_patient_group = Group.objects.get_or_create(name='PATIENT')
+            my_patient_group[0].user_set.add(user)
+            data = {
+                'email': request.user.email,
+                'Patient_name': user.first_name,
+                'Patient_username': user.username,
+                'Patient_password': user.password,
+            }
+
+            msg = '''
+                                                            Your Doctor
+
+            Patient Name:\t{}
+            Admin Email:\t{}
+                ------------------------------------------------Symptoms Description---------------------------------------------------
+            Hello Patient,
+
+            In starting you doctor details is described, and you need your Patient portal so here your Id and Password:\n usrname:\t{}\n Password:\t{}\n
+            '''.format(data['Patient_name'], data['email'], data['Patient_username'], data['Patient_password'])
+            send_mail('Your Doctor', msg, settings.EMAIL_HOST_USER,
+                      [user.email], fail_silently=False)
+            print(data)
+            print(user.email)
+        return HttpResponseRedirect('admin_view_patient')
+    return render(request, 'admin_add_patient.html', context=p_context)
+
+
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def admin_approve_patient(request):
+    patients = models.Patient.objects.all().filter(status=False)
+    # for profile picture of patient in sidebar
+    admin = models.Admin.objects.get(user_id=request.user.id)
+    p_context = {
+        'admin': admin,
+        'patients': patients,
+    }
+    return render(request, 'admin_approve_patient.html', context=p_context)
+
+
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def approve_patient(request, pk):
+    patient = models.Patient.objects.get(id=pk)
+    patient.status = True
+    patient.save()
+    return redirect(reverse('admin_approve_patient'))
+
+
+@login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def reject_patient(request, pk):
+    patient = models.Patient.objects.get(id=pk)
+    user = models.User.objects.get(id=patient.user_id)
+    user.delete()
+    patient.delete()
+    return redirect('admin_approve_patient')

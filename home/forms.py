@@ -72,3 +72,18 @@ class patientappointmentform(forms.ModelForm):
     class Meta:
         model = models.Appointment
         fields = ['description', 'status']
+
+
+class adminsigupform(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'username', 'password', 'email']
+        widgets = {
+            'password': forms.PasswordInput()
+        }
+
+
+class adminform(forms.ModelForm):
+    class Meta:
+        model = models.Admin
+        fields = ['address', 'mobile', 'department', 'profile_pic']

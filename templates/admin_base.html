@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Title Page-->
-    <title>Doctor Dashboard</title>
+    <title>Admin Dashboard</title>
 
     <!-- Fontfaces CSS-->
     <link href="{% static '/css/font-face.css' %}" rel="stylesheet" media="all">
@@ -47,9 +47,9 @@
                         <div class="account2">
                             <div class="account2">
                                 <div class="image img-cir img-120">
-                                    <img src="{% static doctor.profile_pic.url %}" alt="Profile Pic" />
+                                    <img src="{% static admin.profile_pic.url %}" alt="Profile Pic" />
                                 </div>
-                                <h4 class="name">{{doctor.get_name}}</h4>
+                                <h4 class="name">{{admin.get_name}}</h4>
                                 <a href="/logout">Logout</a>
                             </div>
                         </div>
@@ -60,15 +60,15 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="active has-sub">
-                            <a class="js-arrow" href="{% url 'doctor_dashboard' %}">
+                            <a class="js-arrow" href="{% url 'admin_dashboard' %}">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
                         <li>
-                            <a href="{% url 'doctor_appointment' %}">
-                                <i class="fas fa-chart-bar"></i>Appoitment</a>
+                            <a href="{% url 'admin_doctor' %}">
+                                <i class="fas fa-chart-bar"></i>Doctor</a>
                         </li>
                         <li>
-                            <a href="{% url 'doctor_patient' %}">
+                            <a href="{% url 'admin_patient' %}">
                                 <i class="fas fa-table"></i>Patient</a>
                         </li>
                     </ul>
@@ -84,28 +84,28 @@
                     <img src="{% static 'logo.png' %}" alt="logo" width="70" height="50"
                         class="d-inline-block align-text-top" />
                 </a>
-                Doctor Dashboard
+                Admin Dashboard
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
                 <div class="account2">
                     <div class="image img-cir img-120">
-                        <img src="{% static doctor.profile_pic.url %}" alt="Profile Pic" />
+                        <img src="{% static admin.profile_pic.url %}" alt="Profile Pic" />
                     </div>
-                    <h4 class="name">{{doctor.get_name}}</h4>
+                    <h4 class="name">{{admin.get_name}}</h4>
                     <a href="{% url 'logout'%}" >Logout</a>
                 </div>
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
-                            <a class="js-arrow" href="{% url 'doctor_dashboard' %}">
+                            <a class="js-arrow" href="{% url 'admin_dashboard' %}">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
                         <li>
-                            <a href="{% url 'doctor_appointment' %}">
-                                <i class="fas fa-chart-bar"></i>Appoitment</a>
+                            <a href="{% url 'admin_doctor' %}">
+                                <i class="fas fa-plus"></i>Doctor</a>
                         </li>
                         <li>
-                            <a href="{% url 'doctor_patient' %}">
+                            <a href="{% url 'admin_patient' %}">
                                 <i class="fas fa-table"></i>Patient</a>
                         </li>
                     </ul>

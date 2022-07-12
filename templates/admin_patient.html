@@ -1,4 +1,4 @@
-{% extends 'doctor_base.html' %}
+{% extends 'admin_base.html' %}
 {%load static%}
 {% block content %}
 
@@ -18,14 +18,15 @@
                         <div class="overview-item overview-item--c3">
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
+                                    <a href="{% url 'admin_view_patient' %}">
                                     <div class="icon">
                                         <i class="zmdi zmdi-account-o"></i>
                                     </div>
                                     <div class="text">
                                         <h2>{{patientcount}}</h2>
                                         <span>Total Patient</span>
-                                        <p>Wants to Admit : {{pendingpatientcount}}</p>
                                     </div>
+                                </a>
                                 </div>
                                 <div class="overview-chart">
                                     <canvas id="widgetChart1"></canvas>
@@ -67,7 +68,7 @@
                         <div class="overview-item overview-item--c6">
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
-                                    <a href="{% url 'doctor_add_patient' %}">
+                                    <a href="{% url 'admin_add_patient' %}">
                                         <div class="icon">
                                             <i class="zmdi zmdi-info"></i>
                                         </div>
@@ -83,54 +84,16 @@
                         </div>
                     </div>
                     <div class="col-sm-1 col-lg-6">
-                        <div class="overview-item overview-item--c1">
-                            <div class="overview__inner">
-                                <div class="overview-box clearfix">
-                                    <a href="{% url 'doctor_view_patient' %}">
-                                        <div class="icon">
-                                            <i class="zmdi zmdi-calendar"></i>
-                                        </div>
-                                        <div class="text">
-                                            <span>View Patient</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="overview-chart">
-                                    <canvas id="widgetChart3"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-1 col-lg-6">
                         <div class="overview-item overview-item--c4">
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
-                                    <a href="{% url 'doctor_approve_patient' %}">
+                                    <a href="{% url 'admin_approve_patient' %}">
                                         <div class="icon">
                                             <i class="zmdi zmdi-accounts"></i>
                                         </div>
                                         <div class="text">
                                             <h2>{{pendingpatientcount}}</h2>
                                             <span>Patient Under You For Approve</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="overview-chart">
-                                    <canvas id="widgetChart4"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-1 col-lg-6">
-                        <div class="overview-item overview-item--c2">
-                            <div class="overview__inner">
-                                <div class="overview-box clearfix">
-                                    <a href="{% url 'doctor_discharge_patient' %}">
-                                        <div class="icon">
-                                            <i class="zmdi zmdi-accounts"></i>
-                                        </div>
-                                        <div class="text">
-                                            <span>Patient Under Discharge</span>
                                         </div>
                                     </a>
                                 </div>

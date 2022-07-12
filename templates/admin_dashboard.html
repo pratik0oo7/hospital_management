@@ -1,0 +1,104 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block content %}
+{%include 'admin_dashboard_card.html'%}
+
+<body>
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="overview-wrap">
+                            <h2 class="title-1">Recent Doctor's</h2>
+                        </div>
+                        <div class="container ">
+                            {% if doctors %}
+                                <div class="">
+                                    <br>
+                                    <div class="table-responsive table--no-card m-b-40">
+                                        <table class="table table-borderless table-striped table-earning">
+                                            <thead>
+                                                <tr>
+                                                  <th>Name</th>
+                                                  <th>Department</th>
+                                                  <th>Mobile</th>
+                                                  <th>Status</th>
+                                      
+                                                </tr>
+                                              </thead>
+                                              {% for d in doctors %}
+                                              <tr>
+                                                <td> {{d.get_name}}</td>
+                                                <td>{{d.department}}</td>
+                                                <td>{{d.mobile}}</td>
+                                                {%if d.status%}
+                                                <td> <span class="btn btn-primary badge">Permanent</span></td>
+                                                {% else %}
+                                                <td> <span class="btn btn-success badge">On Hold</span></td>
+                                                {% endif %}
+                                      
+                                              </tr>
+                                              {% endfor %}
+                                        </table>
+                                    </div>
+                                </div>
+                            {%else%}
+                                <br><br><br>
+                                <h4 style="text-align: center;color: rgb(255, 64, 64);">No Recent Doctor Found !!!</h4>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="overview-wrap">
+                            <h2 class="title-1">Recent Patient's</h2>
+                        </div>
+                        <div class="container ">
+                            {% if patients %}
+                                <div class="">
+                                    <br>
+                                    <div class="table-responsive table--no-card m-b-40">
+                                        <table class="table table-borderless table-striped table-earning">
+                                            <thead>
+                                                <tr>
+                                                  <th>Name</th>
+                                                  <th>Symptoms</th>
+                                                  <th>Mobile</th>
+                                                  <th>Address</th>
+                                                  <th>Status</th>
+                                      
+                                                </tr>
+                                              </thead>
+                                              {% for p in patients %}
+                                              <tr>
+                                                <td> {{p.get_name}}</td>
+                                                <td>{{p.symptoms}}</td>
+                                                <td>{{p.mobile}}</td>
+                                                <td>{{p.address}}</td>
+                                                {%if p.status%}
+                                                <td> <span class="btn btn-primary badge">Admitted</span></td>
+                                                {% else %}
+                                                <td> <span class="btn btn-success badge">On Hold</span></td>
+                                                {% endif %}
+                                      
+                                              </tr>
+                                              {% endfor %}
+                                        </table>
+                                    </div>
+                                </div>
+                            {%else%}
+                                <br><br><br>
+                                <h4 style="text-align: center;color: rgb(255, 64, 64);">No Recent Patient Found !!!</h4>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock content %}

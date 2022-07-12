@@ -2,9 +2,16 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 
+# doctor model
+departments = [('Cardiologist', 'Cardiologist'),
+               ('Dermatologists', 'Dermatologists'),
+               ('Emergency Medicine Specialists',
+                'Emergency Medicine Specialists'),
+               ('Allergists/Immunologists', 'Allergists/Immunologists'),
+               ('Anesthesiologists', 'Anesthesiologists'),
+               ('Colon and Rectal Surgeons', 'Colon and Rectal Surgeons')
+               ]
 # patient model
-
-
 class Patient(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_pic = models.ImageField(
@@ -32,16 +39,6 @@ class Patient(models.Model):
     def __str__(self):
         return self.user.first_name+" ("+self.symptoms+")"
 
-
-# doctor model
-departments = [('Cardiologist', 'Cardiologist'),
-               ('Dermatologists', 'Dermatologists'),
-               ('Emergency Medicine Specialists',
-                'Emergency Medicine Specialists'),
-               ('Allergists/Immunologists', 'Allergists/Immunologists'),
-               ('Anesthesiologists', 'Anesthesiologists'),
-               ('Colon and Rectal Surgeons', 'Colon and Rectal Surgeons')
-               ]
 
 
 class Doctor(models.Model):
@@ -72,6 +69,34 @@ class Doctor(models.Model):
         return "{} ({})".format(self.user.first_name, self.department)
 
 
+
+#adminmodel
+class Admin(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_pic = models.ImageField(
+        upload_to='profile_pic/AdminProfilePic/', null=True, blank=True)
+    address = models.CharField(max_length=40)
+    mobile = models.CharField(max_length=20, null=True)
+    department = models.CharField(
+        max_length=50, choices=departments, default='Cardiologist')
+    
+    @property
+    def get_name(self):
+        return self.user.first_name+" "+self.user.last_name
+    # is is used to derived name and department name save formate in database
+
+    @property
+    def email(self):
+        return self.user.email
+
+    @property
+    def get_id(self):
+        return self.user.id
+
+    def __str__(self):
+        return "{} ({})".format(self.user.first_name, self.department)
+
+
 # APPOITMENT
 class Appointment(models.Model):
     patientId = models.PositiveIntegerField(null=True)
@@ -81,6 +106,13 @@ class Appointment(models.Model):
     appointmentDate = models.DateField(auto_now=True)
     description = models.TextField(max_length=500)
     status = models.BooleanField(default=False)
+
+    @property
+    def get_id(self):
+        return self.user.id
+
+    def __str__(self):
+        return "{} ({}) {}".format(self.patientName, self.doctorName, self.appointmentDate)
 
 
 class PatientDischargeDetails(models.Model):
@@ -104,6 +136,13 @@ class PatientDischargeDetails(models.Model):
     @property
     def email(self):
         return self.user.email
+    
+    @property
+    def get_id(self):
+        return self.user.id
+
+    def __str__(self):
+        return "{} ({}) {}".format(self.patientName, self.total, self.assignedDoctorName)
 
 
 class Medicalreceipt(models.Model):

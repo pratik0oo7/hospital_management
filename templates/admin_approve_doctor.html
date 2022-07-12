@@ -1,4 +1,4 @@
-{% extends 'doctor_base.html' %}
+{% extends 'admin_base.html' %}
 {%load static%}
 {% block content %}
 
@@ -9,13 +9,12 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="overview-wrap">
-                            <h2 class="title-1">Your Patients Who Want to Admit</h2>
+                            <h2 class="title-1">Your Doctor Who Want to Permanent</h2>
                         </div>
                         <div class="container ">
                             <br>
-                            {% if patients %}
+                            {% if doctors %}
                             <div class="">
-                                <center><h2 class="title-1 m-b-25">Approve your Patient</h2></center>
                                 <div class="table-responsive table--no-card m-b-45">
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
@@ -29,15 +28,15 @@
                                               <th>Reject</th>
                                             </tr>
                                           </thead>
-                                          {% for p in patients %}
+                                          {% for p in doctors %}
                                           <tr>
                                             <td> {{p.get_name}}</td>
                                             <td> <img src="{% static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
                                             <td>{{p.symptoms}}</td>
                                             <td>{{p.mobile}}</td>
                                             <td>{{p.address}}</td>
-                                            <td><a class="btn btn-primary btn-xs" href="{% url 'approve_patient' p.id  %}"><span class="zmdi zmdi-check"></span></a></td>
-                                            <td><a class="btn btn-danger btn-xs" href="{% url 'reject_patient' p.id  %}"><span class="zmdi zmdi-close"></span></a></td>
+                                            <td><a class="btn btn-primary btn-xs" href="{% url 'approve_doctor' p.id  %}"><span class="zmdi zmdi-check"></span></a></td>
+                                            <td><a class="btn btn-danger btn-xs" href="{% url 'reject_doctor' p.id  %}"><span class="zmdi zmdi-close"></span></a></td>
                                           </tr>
                                           {% endfor %}
                                     </table>
